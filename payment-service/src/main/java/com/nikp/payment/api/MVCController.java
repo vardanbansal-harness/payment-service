@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.nikp.captcha.CaptchaService;
+import com.nikp.cvdemo.logs.LoggingService;
 import com.nikp.eventbus.api.EventBus;
 import com.nikp.eventbus.domain.Event;
 import com.nikp.payment.domain.Payment;
@@ -33,6 +34,8 @@ public class MVCController {
   @Autowired
   private CaptchaService captchaService;
 
+  @Autowired
+  private LoggingService loggingService;
   
   @Value("${harness.build}" )
   String buildNumber;
@@ -54,6 +57,7 @@ public class MVCController {
   String number, @RequestParam(name = "sename", required = false, defaultValue = "") 
   String sename, Model model) {
     System.out.println("all payments executed");
+    loggingService.doLog();
     model.addAttribute("list", paymentRepository.findAll());
     model.addAttribute("number",buildNumber );
     model.addAttribute("sename", seName);
@@ -126,6 +130,19 @@ public class MVCController {
     return "allPayments";
 
   
+  }
+  
+  
+
+  @RequestMapping("/mvc/payment")
+  public String redirectPayment(@RequestParam(name = "number", required = false, defaultValue = "") 
+  String number, @RequestParam(name = "sename", required = false, defaultValue = "") 
+  String sename, Model model) {
+    System.out.println("all payments executed");
+    model.addAttribute("list", paymentRepository.findAll());
+    model.addAttribute("number",buildNumber );
+    model.addAttribute("sename", seName);
+    return "allPayments";
   }
   
 }

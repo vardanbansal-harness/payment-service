@@ -38,12 +38,14 @@ public class CaptchaService extends AbstractCaptchaService {
         /**
          * Define you target on which you would like to evaluate the featureFlag
          */
-    
+
+    	HashMap map = new HashMap<String,Object>();
+    	map.put("response", response);
     	
         Target target = Target.builder()
-                .name(targetName)
+                .name(response)
                 .identifier(targetName)
-                .attributes(new HashMap<String, Object>())
+                .attributes(map)
                 .build();
         
        boolean result =cfClient.boolVariation("bankvalidation", target, false);

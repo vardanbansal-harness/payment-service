@@ -19,6 +19,7 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
 import com.nikp.captcha.CaptchaService;
+import com.nikp.cvdemo.logs.LoggingService;
 import com.nikp.payment.api.PaymentService;
 
 
@@ -52,6 +53,11 @@ public class PaymentApplication {
     @Bean
     public CaptchaService captchaService() {
     	return new CaptchaService();
+    } 
+    
+    @Bean
+    public LoggingService loggingService() {
+    	return new LoggingService();
     }
 
     @Bean
