@@ -89,6 +89,28 @@ pipeline:
                                                 action:
                                                     type: Ignore
                           - step:
+                                type: Plugin
+                                name: SonarScan
+                                identifier: SonarScan
+                                spec:
+                                    connectorRef: nikpdockerhub
+                                    image: diegokoala/harness-cie-sonarqube-scanner:latest
+                                    privileged: false
+                                    settings:
+                                        sonar_host: http://35.214.81.102
+                                        sonar_token: 3251d902cbb3fa9c8a98fb9037321068d45639c1
+                                        sources: "."
+                                        binaries: "."
+                                        sonar_name: devxdemo
+                                        sonar_key: devxdemo
+                                        artifact_file: artifact.json
+                                        timeout: "600"
+                                        sonar_qualitygate_timeout: "600"
+                                        branch: <+pipeline.variables.branch>
+                                        build_number: <+pipeline.sequenceId>
+                                        sonar_quality_enabled: "true"
+                                    imagePullPolicy: Always
+                          - step:
                                 type: Run
                                 name: Build
                                 identifier: Build
