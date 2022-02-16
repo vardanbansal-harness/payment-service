@@ -409,7 +409,7 @@ pipeline:
                                               skipDryRun: false
                                     - step:
                                           type: Verify
-                                          name: verification_dev
+                                          name: verify_canary
                                           identifier: verify_dev
                                           spec:
                                               type: Canary
